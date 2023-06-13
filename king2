@@ -1,0 +1,28 @@
+
+w_x, w_y = zip(*[som.winner(d) for d in data])
+w_x = np.array(w_x)
+w_y = np.array(w_y)
+
+plt.figure(figsize=(10, 9))
+plt.pcolor(som.distance_map().T, cmap='bone_r', alpha=.2)
+plt.colorbar()
+
+for c in np.unique(target):
+    idx_target = target==c
+    plt.scatter(w_x[idx_target]+.5+(np.random.rand(np.sum(idx_target))-.5)*.8,
+                w_y[idx_target]+.5+(np.random.rand(np.sum(idx_target))-.5)*.8, 
+                s=50, c=colors[c-1], label=label_names[c])
+plt.legend(loc='upper right')
+plt.grid()
+plt.savefig('resulting_images/som_seed.png')
+plt.show()
+
+
+###########################
+import numpy as np
+import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
+from minisom import MiniSom
+import seaborn as sns
+
+
